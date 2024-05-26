@@ -1,9 +1,7 @@
 package com.example.investingpro.News;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.investingpro.FinancialInstrument.FinancialInstrument;
+import jakarta.persistence.*;
 import jakarta.websocket.Decoder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,12 +9,12 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@RequiredArgsConstructor
 public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -25,6 +23,10 @@ public class News {
     private String title;
 
     private String content;
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinTable(joinColumns = @JoinColumn,
+            inverseJoinColumns = @JoinColumn)
+    private List<FinancialInstrument> relatedInstruments ;
 
     private String author;
 

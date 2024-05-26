@@ -1,9 +1,7 @@
 package com.example.investingpro.MarketData;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.investingpro.FinancialInstrument.FinancialInstrument;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,11 +13,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@RequiredArgsConstructor
 public class MarketData {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "Financial_id")
+    private FinancialInstrument financialInstrument;
 
     private String dataId;
 

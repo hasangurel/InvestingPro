@@ -1,10 +1,7 @@
 package com.example.investingpro.Notification;
 
 import com.example.investingpro.User.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,13 +13,14 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@RequiredArgsConstructor
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    private String message;
 
+    private String message;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     private Boolean isRead;
