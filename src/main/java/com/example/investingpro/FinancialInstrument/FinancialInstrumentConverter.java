@@ -17,4 +17,15 @@ public class FinancialInstrumentConverter {
 
 
     }
+    public FinancialInstrument getUpdateRequestConverter(  FinancialInstrumentUpdateRequest financialInstrumentRequest) {
+        FinancialInstrument financialInstrument=new FinancialInstrument();
+        financialInstrument.setId(financialInstrumentRequest.id());
+        financialInstrument.setName(financialInstrumentRequest.name());
+        financialInstrument.setType(financialInstrumentRequest.type());
+        financialInstrument.setMarket(financialInstrumentRequest.market());
+        financialInstrument.setSymbol(financialInstrumentRequest.symbol());
+        financialInstrument.setCurrency(financialInstrumentRequest.currency());
+
+        return financialInstrument;
+    }
 }
